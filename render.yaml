@@ -20,17 +20,17 @@ services:
       - key: JWT_SECRET_KEY
         generateValue: true
       - key: CORS_ORIGINS
-        value: ""
+        sync: false
 
   - type: web
     name: cineshelf-frontend
     runtime: static
     rootDir: frontend
     buildCommand: npm ci && npm run build
-    publishPath: dist
+    staticPublishPath: ./dist
     envVars:
       - key: VITE_API_URL
-        value: ""
+        sync: false
     routes:
       - type: rewrite
         source: /*
