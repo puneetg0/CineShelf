@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -17,9 +18,19 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(title="CineShelf API", version="1.0.0", lifespan=lifespan)
 
+# CORS_ORIGINS can be a comma-separated list of allowed origins.
+# Always includes localhost for local development.
+_default_origins = "http://localhost:5173,http://127.0.0.1:5173"
+_cors_env = os.getenv("CORS_ORIGINS", "")
+_allowed_origins = list({
+    origin.strip()
+    for origin in (_default_origins + "," + _cors_env).split(",")
+    if origin.strip()
+})
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=_allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
