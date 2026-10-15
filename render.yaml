@@ -5,14 +5,13 @@ databases:
     user: cineshelf
 
 services:
-  # ── Backend (FastAPI / uvicorn) ──────────────────────────────────────────────
   - type: web
     name: cineshelf-api
     runtime: python
+    plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
-    plan: free
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -21,19 +20,17 @@ services:
       - key: JWT_SECRET_KEY
         generateValue: true
       - key: CORS_ORIGINS
-        sync: false   # fill in manually after the frontend URL is known
+        value: ""
 
-  # ── Frontend (Vite static site) ──────────────────────────────────────────────
   - type: web
     name: cineshelf-frontend
     runtime: static
     rootDir: frontend
     buildCommand: npm ci && npm run build
-    staticPublishPath: dist
-    plan: free
+    publishPath: dist
     envVars:
       - key: VITE_API_URL
-        sync: false   # fill in manually after the backend URL is known
+        value: ""
     routes:
       - type: rewrite
         source: /*
