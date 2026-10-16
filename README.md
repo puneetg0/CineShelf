@@ -1,8 +1,14 @@
 # CineShelf  Live- https://cineshelf-frontend-5qiq.onrender.com/
 
+
 A full-stack movie collection manager. Add films to your personal library, track what you've watched, filter by genre, and manage everything through a clean web interface.
 
-Live demo: deploy your own instance in minutes using the included `render.yaml` blueprint.
+## CineShelf
+<img width="1682" height="1004" alt="image" src="https://github.com/user-attachments/assets/5371c3bd-352e-4a30-8214-c691ada4e303" />
+
+
+## Add Movies
+<img width="1706" height="999" alt="image" src="https://github.com/user-attachments/assets/8914ce70-888d-4d5f-8e9d-4713fd91c25d" />
 
 ---
 
